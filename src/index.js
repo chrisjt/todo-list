@@ -15,9 +15,15 @@ function Form(props) {
   )
 }
 
-function Item(props) {
+function List(props) {
+  const listItems = props.items.map((item) =>
+    <li key={item}>
+      {item}
+    </li>
+  );
+  
   return (
-    <li>{props.item}</li>
+    <ul>{listItems}</ul>
   )
 }
 
@@ -25,7 +31,7 @@ class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: ['Create code', 'Commit changes to .git', 'Run server']
     }
   }
   render() {
@@ -33,10 +39,7 @@ class Container extends React.Component {
       <div>
         <Form />
         <br/>
-        <ul>
-          <Item item={item} />
-          <Item item={item} />
-        </ul>
+        <List items={this.state.items}/>
       </div>
     )
   }

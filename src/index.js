@@ -3,6 +3,14 @@ import ReactDOM from "react-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+function Item(props) {
+  return (
+    <li>{props.item}</li>
+  )
+}
+
+const item = "Create a website";
+
 ReactDOM.render(
   <div>
     <form>
@@ -14,7 +22,8 @@ ReactDOM.render(
     </form>
     <br/>
     <ul>
-      <li>Item 1</li>
+      <Item item={item} />
+      <Item item={item} />
     </ul>
   </div>,
   document.getElementById('container')

@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Form(props) {
   return (
-    <form onSubmit={props.onSubmit} >
+    <form id="frmItem" onSubmit={props.onSubmit} >
       <div class="form-group">
         <label for="inputTodo">To-do item</label>
         <input type="text" class="form-control" id="inputTodo" placeholder="Enter to-do item" />
@@ -37,7 +37,12 @@ class Container extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    console.log("Form submitted")
+    const inputItem = document.getElementById("frmItem");
+    const arrItems = this.state.items;
+    arrItems.push(inputItem.elements[0].value);
+    this.setState({
+      items: arrItems
+    })
   }
   render() {
     return (

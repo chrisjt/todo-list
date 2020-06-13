@@ -18,6 +18,9 @@ function Form(props) {
 function List(props) {
   const listItems = props.items.map((item) =>
     <li key={item}>
+      <button type="button" onClick={() => props.onClick(item)} class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
       {item}
     </li>
   );
@@ -35,11 +38,25 @@ class Container extends React.Component {
       items: ['Write code', 'Commit changes to .git', 'Run server']
     }
   }
+  handleRemove(item) {
+    const arrItems = this.state.items;
+    function getIndex(checkItem) {
+      return checkItem == item;
+    }
+    var indexItem = arrItems.findIndex(getIndex);
+    arrItems.splice(indexItem, 1);
+    // update state
+    this.setState({
+      items: arrItems
+    })
+
+  }
   handleSubmit(event) {
     event.preventDefault();
     const inputItem = document.getElementById("frmItem");
     const arrItems = this.state.items;
     arrItems.push(inputItem.elements[0].value);
+    // update state
     this.setState({
       items: arrItems
     })
@@ -51,7 +68,10 @@ class Container extends React.Component {
           onSubmit={(event) => this.handleSubmit(event) }
         />
         <br/>
-        <List items={this.state.items}/>
+        <List
+          onClick={(item) => this.handleRemove(item) }
+          items={this.state.items}
+        />
       </div>
     )
   }

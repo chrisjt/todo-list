@@ -35,19 +35,26 @@ function Form(props) {
 
 function ListItemCheckbox(props) {
   var content
-  if(props.checked) {
+  var checkbox
+  if(props.checked == true) {
+    checkbox = (
+      <input type="checkbox" id={props.item} onClick={props.onClick} checked/>
+    )
     content = (
       <del>{props.item}</del>
     )
   }
   else {
+    checkbox = (
+      <input type="checkbox" id={props.item} onClick={props.onClick}/>
+    )
     content = (
       <span>{props.item}</span>
     )
   }
   return (
     <span>
-      <input type="checkbox" id={props.item} onClick={props.onClick}/>
+      {checkbox}
       &nbsp;&nbsp;
       {content}
     </span>
@@ -57,6 +64,7 @@ function ListItemCheckbox(props) {
 class ListItem extends React.Component {
   constructor(props) {
     super(props);
+    this.handleCheckbox = this.handleCheckbox.bind(this);
     this.state = {
       checked: false
     }
@@ -68,7 +76,7 @@ class ListItem extends React.Component {
   }
   render() {
     return (
-      <li key={this.props.item}>
+      <li>
         <ListItemCheckbox
           onClick={() => this.handleCheckbox()}
           checked={this.state.checked}
@@ -85,6 +93,7 @@ class ListItem extends React.Component {
 function List(props) {
   const listItems = props.items.map((item) =>
     <ListItem
+      key={item}
       onClick={() => props.onClick(item)}
       item={item}
     />

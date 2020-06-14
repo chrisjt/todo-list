@@ -53,9 +53,11 @@ class Container extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    const inputItem = document.getElementById("frmItem");
+    const inputItem = document.getElementById("inputTodo");
+    const item = inputItem.value;
+    inputItem.value = "";
     const arrItems = this.state.items;
-    arrItems.push(inputItem.elements[0].value);
+    arrItems.push(item);
     // update state
     this.setState({
       items: arrItems

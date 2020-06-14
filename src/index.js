@@ -57,11 +57,20 @@ class Container extends React.Component {
     const item = inputItem.value;
     inputItem.value = "";
     const arrItems = this.state.items;
-    arrItems.push(item);
-    // update state
-    this.setState({
-      items: arrItems
-    })
+    function getIndex(checkItem) {
+      return checkItem == item;
+    }
+    var indexItem = arrItems.findIndex(getIndex);
+    if(indexItem == -1) {
+      arrItems.push(item);
+      // update state
+      this.setState({
+        items: arrItems
+      })
+    }
+    else {
+      console.log("Exists already");
+    }
   }
   render() {
     return (

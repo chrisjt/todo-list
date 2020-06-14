@@ -34,14 +34,38 @@ function Form(props) {
   )
 }
 
+function ListItemCheckbox(props) {
+  return null;
+}
+
+class ListItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked: false
+    }
+  }
+  handleCheckbox() {
+
+  }
+  render() {
+    return (
+      <li key={this.props.item}>
+        <button type="button" onClick={this.props.onClick} class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {this.props.item}
+      </li>
+    )
+  }
+}
+
 function List(props) {
   const listItems = props.items.map((item) =>
-    <li key={item}>
-      <button type="button" onClick={() => props.onClick(item)} class="close" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      {item}
-    </li>
+    <ListItem
+      onClick={() => props.onClick(item)}
+      item={item}
+    />
   );
 
   return (

@@ -26,7 +26,6 @@ function Form(props) {
   return (
     <form id="frmItem" onSubmit={props.onSubmit} >
       <div class="form-group">
-        <label for="inputTodo">To-do item</label>
         <input type="text" class="form-control" id="inputTodo" placeholder="Enter to-do item" />
       </div>
       <button class="btn btn-primary">Add</button>
@@ -154,7 +153,13 @@ class Container extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div class="mx-auto"
+        style={{
+          maxWidth: '400px'
+        }}
+      >
+        <br/>
+        <h2>To-do list</h2>
         <Alert
           onClick={() => this.handleMessageClose() }
           message={this.state.message}

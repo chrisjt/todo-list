@@ -116,7 +116,7 @@ class Container extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       message: null,
-      items: ['Write code', 'Commit changes to .git', 'Run server']
+      items: []
     }
   }
   handleRemove(item) {

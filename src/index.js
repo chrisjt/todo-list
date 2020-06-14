@@ -35,7 +35,9 @@ function Form(props) {
 }
 
 function ListItemCheckbox(props) {
-  return null;
+  return (
+    <input type="checkbox" id={props.item}/>
+  );
 }
 
 class ListItem extends React.Component {
@@ -51,6 +53,10 @@ class ListItem extends React.Component {
   render() {
     return (
       <li key={this.props.item}>
+        <ListItemCheckbox
+          item={this.props.item}
+        />
+        &nbsp;&nbsp;
         <button type="button" onClick={this.props.onClick} class="close" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -69,7 +75,13 @@ function List(props) {
   );
 
   return (
-    <ul>{listItems}</ul>
+    <ul
+      style={{
+        listStyleType: 'none'
+      }}
+    >
+      {listItems}
+    </ul>
   )
 }
 

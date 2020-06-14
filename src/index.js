@@ -3,6 +3,25 @@ import ReactDOM from "react-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+function Alert(props) {
+  if(props.message != null) {
+    const htmlAlert = (
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {props.message}
+        <button type="button" onClick={props.onClick} class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    );
+    return (
+      <div>{htmlAlert}</div>
+    )
+  }
+  else {
+    return null;
+  }
+}
+
 function Form(props) {
   return (
     <form id="frmItem" onSubmit={props.onSubmit} >
@@ -35,6 +54,7 @@ class Container extends React.Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
+      message: null,
       items: ['Write code', 'Commit changes to .git', 'Run server']
     }
   }
@@ -50,6 +70,11 @@ class Container extends React.Component {
       items: arrItems
     })
 
+  }
+  handleMessageClose() {
+    this.setState({
+      message: null
+    })
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -69,12 +94,18 @@ class Container extends React.Component {
       })
     }
     else {
-      console.log("Exists already");
+      this.setState({
+        message: "Todo item exists already."
+      })
     }
   }
   render() {
     return (
       <div>
+        <Alert
+          onClick={() => this.handleMessageClose() }
+          message={this.state.message}
+        />
         <Form
           onSubmit={(event) => this.handleSubmit(event) }
         />
